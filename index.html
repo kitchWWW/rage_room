@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rage Room</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="noise-canvas" aria-hidden="true"></canvas>
+  <div id="white-overlay" aria-hidden="true"></div>
+
+  <header>
+    <h1>Rage Room</h1>
+  </header>
+  <main>
+    <div class="role-picker">
+      <a class="role-card" href="admin.html">
+        <div class="label">Admin</div>
+        <div class="sub">Runs the fixed media</div>
+      </a>
+      <a class="role-card" href="player.html">
+        <div class="label">Player</div>
+        <div class="sub">Types responses, triggers sounds</div>
+      </a>
+    </div>
+  </main>
+
+  <script src="background.js"></script>
+</body>
+</html>

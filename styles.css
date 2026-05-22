@@ -1,0 +1,344 @@
+/* Rage Room – shared styles. White background, red (#FF0000) text. */
+
+:root {
+  --bg: #ffffff;
+  --fg: #ff0000;
+  --fg-soft: #ff6666;
+  --panel: #ffffff;
+  --border: #ff0000;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* === Noise background + white overlay === */
+#noise-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  pointer-events: none;
+}
+
+#white-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background: #ffffff;
+  opacity: 1;
+  pointer-events: none;
+}
+
+header, main { position: relative; z-index: 2; }
+
+header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg);
+  font-weight: 500;
+}
+
+header .role {
+  font-size: 0.85rem;
+  color: var(--fg);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.center-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* The huge starting button (Load Audio, then Press Start on Cue). */
+.big-button {
+  font-size: 2rem;
+  padding: 2rem 3.5rem;
+  background: var(--bg);
+  color: var(--fg);
+  border: 3px solid var(--fg);
+  border-radius: 1rem;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.05s ease;
+}
+
+.big-button:hover { background: var(--fg); color: var(--bg); }
+.big-button:active { transform: scale(0.98); }
+.big-button:disabled { border-color: var(--fg-soft); color: var(--fg-soft); cursor: not-allowed; }
+
+.helper {
+  margin-top: 1rem;
+  color: var(--fg);
+  font-size: 1rem;
+}
+
+.phone-reminder {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 2px solid var(--fg);
+  border-radius: 0.5rem;
+  color: var(--fg);
+  font-size: 1rem;
+  font-weight: 600;
+  max-width: 500px;
+  text-align: center;
+}
+
+/* Loading progress bar. */
+.progress-wrap {
+  width: 100%;
+  max-width: 480px;
+  margin-top: 2rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 16px;
+  background: var(--bg);
+  border: 2px solid var(--fg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--fg);
+  width: 0%;
+  transition: width 0.15s linear;
+}
+
+.progress-label {
+  margin-top: 0.5rem;
+  color: var(--fg);
+  font-size: 0.9rem;
+}
+
+/* The 5-second countdown overlay. */
+.countdown {
+  font-size: 12rem;
+  font-weight: 800;
+  color: var(--fg);
+  text-align: center;
+  line-height: 1;
+}
+
+/* Admin diagnostic display. */
+.diagnostic {
+  width: 100%;
+  max-width: 520px;
+  background: var(--panel);
+  border: 2px solid var(--fg);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+}
+
+.diagnostic h2 {
+  margin: 0 0 1rem 0;
+  font-size: 0.8rem;
+  color: var(--fg);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.diag-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--fg);
+}
+
+.diag-row:last-child { border-bottom: none; }
+
+.diag-label { color: var(--fg); font-size: 0.85rem; }
+.diag-value { font-size: 1rem; color: var(--fg); font-variant-numeric: tabular-nums; }
+
+/* Player section header + timer. */
+.section-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  color: var(--fg);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section-timer { font-variant-numeric: tabular-nums; color: var(--fg); font-weight: 600; }
+
+.prompt-card {
+  width: 100%;
+  background: var(--panel);
+  border: 2px solid var(--fg);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.prompt-text {
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0;
+  color: var(--fg);
+}
+
+/* The typing area where the player answers. */
+.typing-area {
+  width: 100%;
+  min-height: 8rem;
+  background: var(--panel);
+  border: 2px solid var(--fg);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  color: var(--fg);
+  caret-color: var(--fg);
+  font-size: 1.5rem;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+}
+
+.typing-area::placeholder { color: var(--fg-soft); }
+.typing-area:focus { border-color: var(--fg); box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.15); }
+
+.typing-hint {
+  margin-top: 0.5rem;
+  color: var(--fg);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* End-of-piece message. */
+.end-message {
+  font-size: 3rem;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: var(--fg);
+}
+
+.credits {
+  margin-top: 2.5rem;
+  text-align: center;
+  color: var(--fg);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.credits p { margin: 0.25rem 0; }
+
+.credits a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.credits a:hover { background: var(--fg); color: var(--bg); text-decoration: none; padding: 0 2px; }
+
+/* Landing page. */
+.role-picker {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.role-card {
+  display: block;
+  background: var(--panel);
+  border: 2px solid var(--fg);
+  border-radius: 0.75rem;
+  padding: 2rem 2.5rem;
+  color: var(--fg);
+  text-decoration: none;
+  min-width: 200px;
+  text-align: center;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.05s ease;
+}
+
+.role-card:hover { background: var(--fg); color: var(--bg); }
+.role-card:active { transform: scale(0.98); }
+
+.role-card .label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.role-card .sub {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.hidden { display: none !important; }
+
+/* ===== Mobile layout ===== */
+@media (max-width: 640px) {
+  header { padding: 0.75rem 1rem; }
+  header h1 { font-size: 0.9rem; }
+  main { padding: 1rem; }
+  .big-button { font-size: 1.4rem; padding: 1.5rem 2rem; }
+  .countdown { font-size: 8rem; }
+  .prompt-text { font-size: 1.25rem; }
+  .typing-area { font-size: 1.1rem; min-height: 6rem; }
+  .end-message { font-size: 2rem; }
+  .diagnostic { padding: 1rem; }
+  .prompt-card { padding: 1.25rem; }
+}

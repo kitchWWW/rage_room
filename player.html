@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Rage Room — Player</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="noise-canvas" aria-hidden="true"></canvas>
+  <div id="white-overlay" aria-hidden="true"></div>
+
+  <header>
+    <h1>Rage Room</h1>
+    <span class="role">Player</span>
+  </header>
+
+  <main>
+    <!-- Stage 1: Load audio -->
+    <section id="stage-load" class="center-stage">
+      <button id="load-btn" class="big-button">Load Audio</button>
+      <div class="helper">Click to preload all keystroke sounds.</div>
+    </section>
+
+    <!-- Stage 2: Loading progress -->
+    <section id="stage-progress" class="center-stage hidden">
+      <div class="progress-wrap">
+        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+        <div id="progress-label" class="progress-label">Loading… 0 / 0</div>
+      </div>
+    </section>
+
+    <!-- Stage 3: Ready to start -->
+    <section id="stage-ready" class="center-stage hidden">
+      <div class="phone-reminder">On a phone? Flip off your silent switch and turn your volume up.</div>
+      <button id="start-btn" class="big-button">Press Start on Cue</button>
+      <div class="helper">Wait to press Start with everyone else.</div>
+    </section>
+
+    <!-- Stage 4: Countdown -->
+    <section id="stage-countdown" class="center-stage hidden">
+      <div id="countdown" class="countdown">5</div>
+    </section>
+
+    <!-- Stage 5: Playing -->
+    <section id="stage-playing" class="center-stage hidden">
+      <div class="section-header">
+        <span id="section-label">Section 1</span>
+        <span class="section-timer" id="section-timer">0:00</span>
+      </div>
+      <div class="prompt-card">
+        <p class="prompt-text" id="prompt-text">…</p>
+      </div>
+      <textarea id="typing-area" class="typing-area"
+                autocomplete="off"
+                autocapitalize="off"
+                autocorrect="off"
+                spellcheck="false"
+                placeholder="Type your answer here…"></textarea>
+      <div class="typing-hint">Each key plays a sound. Press <strong>Enter</strong> when you're finished answering to move to the next prompt.</div>
+    </section>
+
+    <!-- Stage 6: Done -->
+    <section id="stage-done" class="center-stage hidden">
+      <div class="end-message">Thanks for playing.</div>
+      <div class="credits">
+        <p>Conceptualized by <a href="https://www.juliennektsang.com/" target="_blank" rel="noopener">Julienne K. Tsang</a>.</p>
+        <p>Executed by <a href="https://brianellissound.com/" target="_blank" rel="noopener">Brian Ellis</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="prompts.js"></script>
+  <script src="audio-engine.js"></script>
+  <script src="background.js"></script>
+  <script src="player.js"></script>
+</body>
+</html>
