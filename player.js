@@ -78,6 +78,27 @@
 
   let pieceStart = 0;      // AudioContext time when the piece begins
   let currentMovement = 1; // 1, 2, or 3
+
+  // === Section intro lock ===
+  // At the start of each section the typing area is disabled for a short
+  // window so participants listen to the therapist before typing.
+  const SECTION_LOCK_SECONDS = 7;
+  const LOCK_PLACEHOLDER = "please wait for the therapist to finish speaking";
+  const READY_PLACEHOLDER = typingArea.getAttribute("placeholder");
+  let sectionLockTimer = null;
+
+  function lockTypingForSection() {
+    if (sectionLockTimer) clearTimeout(sectionLockTimer);
+    typingArea.disabled = true;
+    typingArea.value = "";
+    typingArea.setAttribute("placeholder", LOCK_PLACEHOLDER);
+    sectionLockTimer = setTimeout(() => {
+      sectionLockTimer = null;
+      typingArea.disabled = false;
+      typingArea.setAttribute("placeholder", READY_PLACEHOLDER);
+      typingArea.focus();
+    }, SECTION_LOCK_SECONDS * 1000);
+  }
   // Per-movement prompt index. Prompts display in the order they appear in
   // PROMPTS[m]; when the index runs off the end it loops back to 0.
   let promptIndex = { 1: 0, 2: 0, 3: 0 };
@@ -110,8 +131,7 @@
     showCurrentPrompt();
     typingArea.value = "";
     snapOverlayForMovement(1);
-    // Focus so keystrokes land in the textarea on desktop.
-    typingArea.focus();
+    lockTypingForSection();
     requestAnimationFrame(tick);
   }
 
@@ -144,6 +164,7 @@
       typingArea.value = "";
       showCurrentPrompt();
       snapOverlayForMovement(currentMovement);
+      lockTypingForSection();
     }
 
     const remaining = boundaries[currentMovement] - elapsed;
