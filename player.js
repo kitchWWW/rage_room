@@ -170,7 +170,7 @@
       // Random move-on sound.
       const moveonFile = engine.randomFile("moveon");
       engine.play("moveon", moveonFile);
-      // Advance prompt (reshuffles when the deck runs out).
+      // Advance to the next prompt in order (loops back when the list ends).
       advancePrompt();
       typingArea.value = "";
       // Nudge overlay opacity toward this movement's `end` target.

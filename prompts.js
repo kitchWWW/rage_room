@@ -19,11 +19,17 @@ const PROMPTS = {
     "Did you see or hear anything today that upset you?",
     "Is there anything that has upset you in the past that you thought of today?",
     "Is there anyone who upset you in the past that you thought of today?",
+    "What was the situation?",
     "Were you angry?",
     "Were you sad?",
     "Were you anxious?",
     "Were you afraid?",
-    "Did you fight back?"
+    "Did you fight back?",
+    "If you didn't fight back, did you wish you did?",
+    "Do you feel like you were wronged?",
+    "Do you feel like you were vindicated?",
+    "Do you take pride in another's downfall?",
+    "What are you willing to destroy to make it to the top?"
   ],
   2: [
     "Have you ever made a mistake?",
@@ -45,9 +51,15 @@ const PROMPTS = {
     "If it wasn't an accident, why did you break something?",
     "What is the point in breaking things?",
     "When something is broken, does it still have value?",
-    "If something cannot be repaired, does it still have value?"
+    "If something cannot be repaired, does it still have value?",
+    "How do you destroy something so that it no longer has value?",
+    "When you destroy something, is it for the purpose of erasure or for the purpose of catharsis?",
+    "When have you destroyed something and NOT felt regret?",
+    "Is destruction worth it?"
   ],
   3: [
+    "How is your health?",
+    "Do you exercise?",
     "How often do you get sick?",
     "How often are you in physical pain?",
     "Do your muscles ache from intentional use?",
@@ -70,7 +82,12 @@ const PROMPTS = {
     "Have you mutilated parts of your body to relieve stress/gain control/etc.?",
     "Have you thought to mutilate parts of your body to relieve stress/gain control/etc.?",
     "Have you ever hurt someone else on accident?",
-    "Have you ever hurt someone else on purpose?"
+    "Have you ever hurt someone else on purpose?",
+    "Is harm and violence ever justified?",
+    "What would drive you or someone else to commit such acts?",
+    "How can we save everyone?",
+    "Can we save everyone?",
+    "Who deserves to be saved?"
   ]
 };
 
