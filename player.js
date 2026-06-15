@@ -86,15 +86,23 @@
   const LOCK_PLACEHOLDER = "please wait for the therapist to finish speaking";
   const READY_PLACEHOLDER = typingArea.getAttribute("placeholder");
   let sectionLockTimer = null;
+  // Authoritative lock state. The keydown handler checks this directly so
+  // typing is blocked even if the `disabled` attribute misbehaves.
+  let sectionLocked = false;
 
   function lockTypingForSection() {
     if (sectionLockTimer) clearTimeout(sectionLockTimer);
+    sectionLocked = true;
     typingArea.disabled = true;
+    typingArea.classList.add("locked");
     typingArea.value = "";
     typingArea.setAttribute("placeholder", LOCK_PLACEHOLDER);
+    typingArea.blur();
     sectionLockTimer = setTimeout(() => {
       sectionLockTimer = null;
+      sectionLocked = false;
       typingArea.disabled = false;
+      typingArea.classList.remove("locked");
       typingArea.setAttribute("placeholder", READY_PLACEHOLDER);
       typingArea.focus();
     }, SECTION_LOCK_SECONDS * 1000);
@@ -131,7 +139,9 @@
     showCurrentPrompt();
     typingArea.value = "";
     snapOverlayForMovement(1);
-    lockTypingForSection();
+    // No intro lock on the first section — typing is available immediately.
+    // The lock only applies between sections (see tick()).
+    typingArea.focus();
     requestAnimationFrame(tick);
   }
 
@@ -178,6 +188,13 @@
   // naturally) and let Enter advance the prompt instead of inserting a newline.
   typingArea.addEventListener("keydown", (e) => {
     if (stages.playing.classList.contains("hidden")) return;
+
+    // During the section intro lock, swallow all input: no sounds, no
+    // typing, no prompt advance.
+    if (sectionLocked) {
+      e.preventDefault();
+      return;
+    }
 
     // Ignore modifiers, arrows, function keys, etc. Only act on real
     // character keys (length 1) and Enter.
